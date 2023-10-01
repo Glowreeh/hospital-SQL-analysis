@@ -1,0 +1,62 @@
+/* TOTAL NUMBER OF PATIENTS */
+    select count(Name) from [hospital csv data]
+
+	/* TO VIEW HOSPITAL TABLE*/
+	 select * from [hospital csv data]
+
+/* TOTAL COUNT OF MALE PATIENTS*/
+    select count (sex) from [hospital csv data]
+	where sex ='M'
+
+
+/* TOTAL COUNT OF FEMALE PATIENTS*/
+    select count (sex) from [hospital csv data]
+	where sex = 'F'
+
+/* TOTAL AMOUNT MADE FROM THE CASE*/
+   select sum(Amount_Paid) from [hospital csv data]
+
+/* TOTAL CASES HANDLED BY THE DOCTOR*/
+   select  count (distinct Case_Type) from [hospital csv data]
+
+/* ILLNESS PATIENTS SUFFER FROM*/
+   select distinct Case_Type from [hospital csv data]
+
+/* TOTAL NUMBER OF DOCTORS*/
+   select count (distinct Attending_Physician) from [hospital csv data]
+
+/* DOCTORS IN THE HOSPITAL*/
+   select  distinct (Attending_Physician) from [hospital csv data]
+
+/* TOTAL SUM OF MONEY MADE BY EACH OF THE DOCTORS*/
+    SELECT Attending_Physician, SUM(Amount_Paid) AS Doctors_Salary
+    FROM [hospital csv data]
+    GROUP BY Attending_Physician
+
+/* THE DOCTOR WITH THE HIGHEST SALARY*/
+   SELECT Attending_Physician, SUM(Amount_Paid) AS [Highest paid doctor]
+    FROM [hospital csv data]
+    GROUP BY Attending_Physician
+	ORDER BY [Highest paid doctor] DESC
+  
+/* DOCTOR WITH THE HIGHEST NUMBER OF CASES*/
+   select Attending_Physician, count(Case_Type) as [Number of Cases Handled] from [hospital csv data]
+   Group by Attending_Physician 
+   order by Attending_Physician desc
+   
+/* PATIENTS ADMITTED IN EACH YEAR*/
+   SELECT Year(Admission_Date) AS [Patients year Admitted], COUNT(*) AS patient_count
+FROM [hospital csv data]
+GROUP BY Year(Admission_Date)
+
+/* TOTAL NUMBER OF PATIENTS dISCHARGED FOR EACH YEAR*/
+   select year(Discharge_Date) as [Patients year discharge], count(*) as Patient_count
+   FROM [hospital csv data]
+   GROUP BY Year(Discharge_Date)
+
+   /* PATIENTS DISCHARGED IN EACH YEAR*/
+   select * from [hospital csv data]
+   where DatePart(Year,Discharge_Date) = 2024
+
+
+  
